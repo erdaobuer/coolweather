@@ -1,0 +1,10 @@
+activity: 存放所有activity
+db:存放所有与数据库相关的代码
+model:存放所有与模型相关的代码
+receiver:存放所有与广播接收器相关的代码
+service:存放所有与服务相关的代码
+util:存放所有与工具相关的代码
+
+
+1.创建数据库和表,并为每个表创建一个实体类生成对应字段的get和set方法
+2.创建CoolWeatherDB类,用来封装数据库的操作,提供读取Province、City、County表内容以及保存实例到表的方法.
