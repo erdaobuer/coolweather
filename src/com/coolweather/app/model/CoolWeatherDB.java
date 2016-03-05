@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.coolweather.app.db.CoolWeatherOpenHelper;
 
-import android.R.integer;
-import android.R.string;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -117,6 +115,7 @@ public class CoolWeatherDB {
 			ContentValues values = new ContentValues();
 			values.put("city_name", city.getCityName());
 			values.put("city_code", city.getCityCode());
+			values.put("province_id", city.getProvinceId());
 			db.insert("City", null, values);
 		}
 	}
@@ -175,7 +174,7 @@ public class CoolWeatherDB {
 	
 	public List<County> loadCounties(int cityId){
 		List<County> list = new ArrayList<County>();
-		Cursor cursor = db.query("County", null, "cityId=?", new String[]{String.valueOf(cityId)}, null, null, null);
+		Cursor cursor = db.query("County", null, "city_id=?", new String[]{String.valueOf(cityId)}, null, null, null);
 		if(cursor.moveToFirst()){
 			do {
 				County county = new County();

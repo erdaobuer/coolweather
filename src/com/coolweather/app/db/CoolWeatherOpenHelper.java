@@ -10,6 +10,7 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 	 * 这个类实现对数据库的创建和升级
 	 * 
 	 */
+	
 
 	/**
 	 * Province表建表语句
@@ -17,8 +18,8 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 	 * 其中primary[主要的,最初的,基本的],autoincrement[自动增长]
 	 */
 
-	public static final String CREATER_PROVINCE = "create table Province ("
-			+ "id integer primary key autoincrement," + "province_name text,"
+	public static final String CREATE_PROVINCE = "create table Province ("
+			+ "id integer primary key autoincrement, " + "province_name text, "
 			+ "province_code text)";
 
 	/**
@@ -26,17 +27,17 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 	 */
 
 	public static final String CREATE_CITY = "create table City ("
-			+ "id integer primary key autoincrement," + "city_name text"
-			+ "city_code text" + "province_id integer)";
+			+ "id integer primary key autoincrement, " + "city_name text, "
+			+ "city_code text, " + "province_id integer)";
 
 	/**
 	 * County表建表语句
 	 * 
 	 */
 
-	public static final String CREATER_COUNTY = "create table county ("
-			+ "id integer primary key autoincrement," + "county_name text,"
-			+ "county_code text," + "city_id integer";
+	public static final String CREATE_COUNTY = "create table county ("
+			+ "id integer primary key autoincrement, " + "county_name text, "
+			+ "county_code text, " + "city_id integer)";
 	
 
 	public CoolWeatherOpenHelper(Context context, String name,
@@ -47,9 +48,9 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATER_PROVINCE);//创建Province表
+		db.execSQL(CREATE_PROVINCE);//创建Province表
 		db.execSQL(CREATE_CITY);//创建City表
-		db.execSQL(CREATER_COUNTY);//创建County表
+		db.execSQL(CREATE_COUNTY);//创建County表
 
 	}
 
