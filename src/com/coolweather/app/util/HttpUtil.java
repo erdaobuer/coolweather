@@ -77,4 +77,9 @@ public class HttpUtil {
 			}
 		}).start();
 	}
+	
+	/**
+	 * 解析服务器返回的JSON数据,并将解析出的数据存储到本地
+	 */
+	
 }

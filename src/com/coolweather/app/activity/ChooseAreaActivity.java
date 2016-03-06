@@ -12,13 +12,13 @@ import com.coolweather.app.util.HttpUtil.HttpCallbackListener;
 import com.coolweather.app.util.Utility;
 import com.example.coolweather.R;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Color;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -74,6 +74,15 @@ public class ChooseAreaActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		if (prefs.getBoolean("city_selected", false)) {
+			Intent intent = new Intent(this, WeatherActivity.class);
+			startActivity(intent);
+			finish();
+			return;
+		}
+
 		// 设置无标题
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// 为Activity关联布局文件
@@ -104,7 +113,7 @@ public class ChooseAreaActivity extends Activity {
 		// 设置分割线的颜色.
 		// listView.setBackgroundColor(Color.GRAY);
 		// 设置背景透明度(0-255)
-		 listView.getBackground().setAlpha(80);
+		listView.getBackground().setAlpha(80);
 
 		/**
 		 * 加载省级数据,在其中为dataList集合添加数据
@@ -131,6 +140,14 @@ public class ChooseAreaActivity extends Activity {
 					selectedCity = cityList.get(position);
 					// 加载该市下面的县级数据
 					queryCounties();
+				} else if (nowLevel == LEVEL_COUNTY) {
+					String countyCode = countyList.get(position)
+							.getCountyCode();
+					Intent intent = new Intent(ChooseAreaActivity.this,
+							WeatherActivity.class);
+					intent.putExtra("county_code", countyCode);
+					startActivity(intent);
+					finish();
 				}
 			}
 		});
